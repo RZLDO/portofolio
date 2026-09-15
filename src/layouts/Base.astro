@@ -1,6 +1,6 @@
 ---
 interface Props { title:string; description:string; lang?:'id'|'en'; image?:string; }
-const { title, description, lang='id', image='/profile.png' } = Astro.props;
+const { title, description, lang='id', image='/og.png' } = Astro.props;
 import '../styles/global.css';
 const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname;
 ---
