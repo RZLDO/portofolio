@@ -12,7 +12,7 @@ const { t, lang } = Astro.props;
         <h3 class="mt-5 font-display text-lg text-[#f7f5f2]">{s.title[lang]}</h3>
         <ul class="mt-4 space-y-2 border-t border-white/[0.06] pt-4">
           {s.items[lang].map((item) => (
-            <li class="text-[13px] leading-relaxed text-[#b9b9b4]">— {item}</li>
+            <li class="text-[13px] leading-relaxed text-[#b9b9b4]">- {item}</li>
           ))}
         </ul>
       </div>

@@ -19,7 +19,7 @@ const { Content } = await post.render();
 const fmtDate = post.data.pubDate.toLocaleDateString(lang === 'id' ? 'id-ID' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
-<Base title={`${post.data.title} — Rizaldo Setiawan`} description={post.data.description} lang={lang === 'en' ? 'en' : 'id'}>
+<Base title={`${post.data.title} - Rizaldo Setiawan`} description={post.data.description} lang={lang === 'en' ? 'en' : 'id'}>
   <main class="mx-auto max-w-[700px] px-[var(--margin)] pb-24 pt-28">
     <a href={`/${lang}/blog`} class="font-mono text-xs uppercase tracking-[0.12em] text-[#b9b9b4] transition-colors hover:text-[#c496ff]">← {t.blog.title}</a>
     <article class="mt-8" data-fade-in>

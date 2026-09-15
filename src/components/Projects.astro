@@ -11,7 +11,7 @@ const { t, lang } = Astro.props;
         <span class="line"><span class="text">{t.projects.subtitle}</span></span>
       </h2>
     </div>
-    <p class="font-mono text-xs text-[#b9b9b4]" data-fade-in style="--d:.15s">0{projects.length} · 2022—2026</p>
+    <p class="font-mono text-xs text-[#b9b9b4]" data-fade-in style="--d:.15s">0{projects.length} · 2022-2026</p>
   </div>
 
   <!-- desktop: index table -->
@@ -25,7 +25,7 @@ const { t, lang } = Astro.props;
     </div>
     {projects.map((p) => (
       <a href={`/${lang}/projects/${p.slug}`} class="group grid grid-cols-[90px_1.4fr_1fr_110px_90px] items-center gap-6 border-b border-white/[0.08] py-6 transition-opacity duration-300 hover:opacity-60" data-fade-in-y>
-        <span class="font-mono text-xs text-[#b9b9b4]">2024—25</span>
+        <span class="font-mono text-xs text-[#b9b9b4]">2024-25</span>
         <span class="font-display text-base text-[#f7f5f2]">{p.title}</span>
         <span class="font-mono text-xs text-[#b9b9b4]">{p.role[lang]} · {p.tech.slice(0, 2).join(', ')}</span>
         <span class="font-mono text-xs uppercase tracking-[0.08em] text-[#b9b9b4]">{p.tech[0]}</span>

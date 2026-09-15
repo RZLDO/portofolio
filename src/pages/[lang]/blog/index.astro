@@ -17,7 +17,7 @@ const emptyText = lang === 'id' ? 'Belum ada tulisan dalam bahasa ini.' : 'No po
 const fmtDate = (d: Date) => d.toLocaleDateString(lang === 'id' ? 'id-ID' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' });
 ---
 
-<Base title={`${t.blog.title} — Rizaldo Setiawan`} description={t.blog.subtitle} lang={lang === 'en' ? 'en' : 'id'}>
+<Base title={`${t.blog.title} - Rizaldo Setiawan`} description={t.blog.subtitle} lang={lang === 'en' ? 'en' : 'id'}>
   <main class="mx-[var(--margin)] pb-24 pt-28">
     <a href={`/${lang}`} class="font-mono text-xs uppercase tracking-[0.12em] text-[#b9b9b4] transition-colors hover:text-[#c496ff]">← {lang === 'id' ? 'Beranda' : 'Home'}</a>
     <h1 class="mt-8 font-display text-4xl font-light tracking-[-0.01em] sm:text-5xl" data-fade-in>{t.blog.title}</h1>

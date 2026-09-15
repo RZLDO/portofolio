@@ -17,11 +17,11 @@ export function getStaticPaths() {
 
 const { lang } = Astro.params;
 const t = lang === 'en' ? en : id;
-const title = 'Rizaldo Setiawan — Mobile & Backend Developer';
+const title = 'Rizaldo Setiawan - Mobile & Backend Developer';
 const description =
   lang === 'en'
-    ? 'Mobile & Backend Developer — Kotlin, Jetpack Compose, Flutter, and REST APIs with Bun, Hono, and PostgreSQL.'
-    : 'Mobile & Backend Developer — Kotlin, Jetpack Compose, Flutter, dan REST API dengan Bun, Hono, dan PostgreSQL.';
+    ? 'Mobile & Backend Developer - Kotlin, Jetpack Compose, Flutter, and REST APIs with Bun, Hono, and PostgreSQL.'
+    : 'Mobile & Backend Developer - Kotlin, Jetpack Compose, Flutter, dan REST API dengan Bun, Hono, dan PostgreSQL.';
 ---
 
 <Base title={title} description={description} lang={lang === 'en' ? 'en' : 'id'}>

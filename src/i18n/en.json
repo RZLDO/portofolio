@@ -11,7 +11,7 @@
   "skills": { "title": "Skills & Technologies" },
   "projects": {
     "title": "Selected Projects",
-    "subtitle": "Apps I've built — from conception to Play Store release.",
+    "subtitle": "Apps I've built - from conception to Play Store release.",
     "detail": "Case Study",
     "demo": "Play Store",
     "appstore": "App Store",
@@ -21,7 +21,7 @@
   "experience": { "title": "Experience", "educationTitle": "Education", "courses": "Courses" },
   "contact": {
     "title": "Let's Work Together",
-    "body": "Have a project or opportunity in mind? Reach out — I'm always open to discussion.",
+    "body": "Have a project or opportunity in mind? Reach out - I'm always open to discussion.",
     "name": "Name",
     "email": "Email",
     "message": "Message",

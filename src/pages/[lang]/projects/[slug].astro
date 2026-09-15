@@ -19,7 +19,7 @@ const t = lang === 'en' ? en : id;
 const project = projects.find((p) => p.slug === slug)!;
 ---
 
-<Base title={`${project.title} — Rizaldo Setiawan`} description={project.summary[lang]} lang={lang === 'en' ? 'en' : 'id'}>
+<Base title={`${project.title} - Rizaldo Setiawan`} description={project.summary[lang]} lang={lang === 'en' ? 'en' : 'id'}>
   <main class="mx-[var(--margin)] pb-24 pt-28">
     <a href={`/${lang}#projects`} class="font-mono text-xs uppercase tracking-[0.12em] text-[#b9b9b4] transition-colors hover:text-[#c496ff]">← {t.projects.title}</a>
 
