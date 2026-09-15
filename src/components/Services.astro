@@ -1,0 +1,21 @@
+---
+import { services } from '../data/profile';
+const { t, lang } = Astro.props;
+---
+
+<section class="mx-[var(--margin)] py-20 md:py-28">
+  <p class="bp-kicker" data-fade-in>{t.services.title}</p>
+  <div class="mt-10 grid gap-4 md:grid-cols-3 md:gap-5">
+    {services.map((s, i) => (
+      <div class="group rounded-2xl border border-white/[0.06] bg-[#242424]/60 p-6 transition-colors duration-500 hover:border-[#c496ff]/30 md:p-7" data-fade-in-y style={`--d:${i * 0.1}s`}>
+        <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-white/[0.04] text-2xl">{s.icon}</div>
+        <h3 class="mt-5 font-display text-lg text-[#f7f5f2]">{s.title[lang]}</h3>
+        <ul class="mt-4 space-y-2 border-t border-white/[0.06] pt-4">
+          {s.items[lang].map((item) => (
+            <li class="text-[13px] leading-relaxed text-[#b9b9b4]">— {item}</li>
+          ))}
+        </ul>
+      </div>
+    ))}
+  </div>
+</section>

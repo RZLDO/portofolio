@@ -1,0 +1,38 @@
+---
+import Base from '../../layouts/Base.astro';
+import Navbar from '../../components/Navbar.astro';
+import Hero from '../../components/Hero.astro';
+import Services from '../../components/Services.astro';
+import About from '../../components/About.astro';
+import Skills from '../../components/Skills.astro';
+import Projects from '../../components/Projects.astro';
+import Experience from '../../components/Experience.astro';
+import Contact from '../../components/Contact.astro';
+import id from '../../i18n/id.json';
+import en from '../../i18n/en.json';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'id' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+const t = lang === 'en' ? en : id;
+const title = 'Rizaldo Setiawan — Mobile & Backend Developer';
+const description =
+  lang === 'en'
+    ? 'Mobile & Backend Developer — Kotlin, Jetpack Compose, Flutter, and REST APIs with Bun, Hono, and PostgreSQL.'
+    : 'Mobile & Backend Developer — Kotlin, Jetpack Compose, Flutter, dan REST API dengan Bun, Hono, dan PostgreSQL.';
+---
+
+<Base title={title} description={description} lang={lang === 'en' ? 'en' : 'id'}>
+  <Navbar t={t} lang={lang} />
+  <main>
+    <Hero t={t} lang={lang} />
+    <Services t={t} lang={lang} />
+    <About t={t} lang={lang} />
+    <Skills t={t} />
+    <Projects t={t} lang={lang} />
+    <Experience t={t} lang={lang} />
+    <Contact t={t} lang={lang} />
+  </main>
+</Base>

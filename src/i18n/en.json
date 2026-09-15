@@ -1,0 +1,31 @@
+{
+  "nav": { "about": "About", "skills": "Skills", "projects": "Projects", "experience": "Experience", "blog": "Blog", "contact": "Contact" },
+  "blog": { "title": "Blog", "subtitle": "Notes on Android, Flutter, and lessons from production." },
+  "hero": {
+    "greeting": "Hi, I'm",
+    "ctaProjects": "View Projects",
+    "ctaCv": "Download CV"
+  },
+  "about": { "title": "About Me" },
+  "services": { "title": "What I Do" },
+  "skills": { "title": "Skills & Technologies" },
+  "projects": {
+    "title": "Selected Projects",
+    "subtitle": "Apps I've built — from conception to Play Store release.",
+    "detail": "Case Study",
+    "demo": "Play Store",
+    "appstore": "App Store",
+    "code": "Code",
+    "role": "Role"
+  },
+  "experience": { "title": "Experience", "educationTitle": "Education", "courses": "Courses" },
+  "contact": {
+    "title": "Let's Work Together",
+    "body": "Have a project or opportunity in mind? Reach out — I'm always open to discussion.",
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "send": "Send Message",
+    "wa": "Chat on WhatsApp"
+  }
+}

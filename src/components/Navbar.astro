@@ -1,0 +1,88 @@
+---
+import { profile } from '../data/profile';
+const { t, lang } = Astro.props;
+const other = lang === 'id' ? 'en' : 'id';
+const links = [
+  { href: '#about', label: t.nav.about },
+  { href: '#skills', label: t.nav.skills },
+  { href: '#projects', label: t.nav.projects },
+  { href: '#experience', label: t.nav.experience },
+  { href: `/${lang}/blog`, label: t.nav.blog },
+];
+---
+
+<header id="siteNav" class="fixed left-1/2 top-3 z-[100] flex h-14 -translate-x-1/2 items-center justify-between gap-6 rounded-xl border border-white/[0.06] bg-[#242424]/70 px-3 pl-4 backdrop-blur-[20px] transition-all duration-700 ease-[cubic-bezier(.19,1,.22,1)]">
+  <a href={`/${lang}`} class="flex items-center gap-2.5">
+    <span class="flex h-8 w-8 items-center justify-center rounded-md bg-[#f7f5f2] text-sm font-medium text-[#1b1b1b]">R</span>
+    <span class="hidden font-mono text-xs uppercase tracking-[0.14em] text-[#f7f5f2] md:inline">Rizaldo</span>
+  </a>
+  <nav class="hidden items-center gap-5 font-mono text-[13px] text-[#f7f5f2]/75 lg:flex">
+    {links.map((l) => (
+      <a href={l.href} class="transition-colors duration-300 hover:text-[#c496ff]">{l.label}</a>
+    ))}
+  </nav>
+  <div class="flex items-center gap-2">
+    <a href={`/${other}`} class="rounded-md border border-white/10 px-2.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-[#f7f5f2]/70 transition-colors hover:border-[#c496ff]/50 hover:text-[#c496ff]">{other}</a>
+    <a href="#contact" class="rounded-md bg-[#f7f5f2] px-3.5 py-2 font-mono text-[12px] font-medium text-[#1b1b1b] transition-colors duration-500 hover:bg-[#c496ff] lg:hidden">{t.nav.contact}</a>
+    <a href="#contact" class="hidden rounded-md bg-[#f7f5f2] px-5 py-2.5 font-mono text-[13px] font-medium text-[#1b1b1b] transition-colors duration-500 hover:bg-[#c496ff] lg:inline-flex">{t.nav.contact}</a>
+    <button id="menuBtn" aria-label="Menu" aria-expanded="false" class="flex h-9 w-9 flex-col items-center justify-center gap-[5px] lg:hidden">
+      <span class="menu-line block h-px w-4 bg-[#f7f5f2] transition-transform duration-300"></span>
+      <span class="menu-line block h-px w-4 bg-[#f7f5f2] transition-opacity duration-300"></span>
+      <span class="menu-line block h-px w-4 bg-[#f7f5f2] transition-transform duration-300"></span>
+    </button>
+  </div>
+</header>
+
+<div id="navBackdrop" class="pointer-events-none fixed inset-0 z-[90] bg-black/40 opacity-0 transition-opacity duration-500 lg:hidden"></div>
+<aside id="navDrawer" class="fixed left-1/2 top-20 z-[95] flex w-[min(420px,calc(100vw-40px))] -translate-x-1/2 flex-col items-center rounded-2xl border border-white/[0.06] bg-[#242424]/95 px-6 py-10 backdrop-blur-[20px] opacity-0 pointer-events-none transition-all duration-500 ease-[cubic-bezier(.19,1,.22,1)] lg:hidden">
+  <nav class="flex flex-col items-center gap-4 text-center">
+    {links.map((l, i) => (
+      <a href={l.href} data-drawer-link class="drawer-item font-display text-2xl text-[#f7f5f2] transition-colors hover:text-[#c496ff]" style={`transition-delay:${120 + i * 50}ms`}>{l.label}</a>
+    ))}
+    <a href="#contact" data-drawer-link class="drawer-item font-display text-2xl text-[#c496ff]" style={`transition-delay:${120 + links.length * 50}ms`}>{t.nav.contact}</a>
+  </nav>
+  <div class="mt-8 border-t border-white/10 pt-5 text-center">
+    <a href="mailto:rizaldo.setiawann@gmail.com" class="font-mono text-xs text-[#b9b9b4] hover:text-[#f7f5f2]">rizaldo.setiawann@gmail.com</a>
+    <p class="mt-1 font-mono text-[11px] uppercase tracking-[0.1em] text-[#b9b9b4]/60">Bandung · Indonesia</p>
+  </div>
+</aside>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const drawer = document.getElementById('navDrawer');
+  const backdrop = document.getElementById('navBackdrop');
+  const lines = document.querySelectorAll('.menu-line');
+  const items = () => document.querySelectorAll('.drawer-item');
+  let open = false;
+
+  function setOpen(v: boolean) {
+    open = v;
+    btn?.setAttribute('aria-expanded', String(v));
+    if (v) {
+      drawer?.classList.remove('opacity-0', 'pointer-events-none');
+      drawer?.classList.add('-translate-y-2');
+      backdrop?.classList.remove('pointer-events-none', 'opacity-0');
+      (lines[0] as HTMLElement).style.transform = 'translateY(6px) rotate(45deg)';
+      (lines[1] as HTMLElement).style.opacity = '0';
+      (lines[2] as HTMLElement).style.transform = 'translateY(-6px) rotate(-45deg)';
+      items().forEach((el) => { (el as HTMLElement).style.opacity = '1'; (el as HTMLElement).style.transform = 'none'; });
+      document.documentElement.classList.add('menu-open');
+    } else {
+      drawer?.classList.add('opacity-0', 'pointer-events-none');
+      backdrop?.classList.add('pointer-events-none', 'opacity-0');
+      (lines[0] as HTMLElement).style.transform = '';
+      (lines[1] as HTMLElement).style.opacity = '';
+      (lines[2] as HTMLElement).style.transform = '';
+      items().forEach((el) => { (el as HTMLElement).style.opacity = '0'; (el as HTMLElement).style.transform = 'translateY(10px)'; });
+      document.documentElement.classList.remove('menu-open');
+    }
+  }
+
+  btn?.addEventListener('click', () => setOpen(!open));
+  backdrop?.addEventListener('click', () => setOpen(false));
+  document.querySelectorAll('[data-drawer-link]').forEach((a) => a.addEventListener('click', () => setOpen(false)));
+</script>
+
+<style>
+  .drawer-item { opacity: 0; transform: translateY(10px); transition: opacity .5s cubic-bezier(.19,1,.22,1), transform .5s cubic-bezier(.19,1,.22,1), color .3s; }
+</style>

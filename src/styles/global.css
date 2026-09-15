@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --margin: 24px;
+  --gap: 24px;
+  --nav-h: 64px;
+}
+@media (min-width: 1025px) {
+  :root { --margin: 28px; --gap: 28px; }
+}
+
+html { background: #1b1b1b; }
+body {
+  background: #1b1b1b;
+  color: #f7f5f2;
+  font-family: Saans, Inter, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: #c496ff; color: #1b1b1b; }
+
+/* — Blueprint print grid (fixed, subtle) — */
+.bp-print { position: fixed; inset: 0; pointer-events: none; z-index: -1; overflow: hidden; }
+.bp-print__bg {
+  position: absolute; inset: 0;
+  opacity: .35;
+  -webkit-mask-image: radial-gradient(circle at 0 0, #fff 0, transparent 22%);
+          mask-image: radial-gradient(circle at 0 0, #fff 0, transparent 22%);
+  background:
+    linear-gradient(rgba(247,245,242,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(247,245,242,0.05) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.bp-print__static {
+  position: absolute; inset: 0; opacity: .5;
+  background: radial-gradient(ellipse at 50% -10%, rgba(196,150,255,0.08), transparent 55%);
+}
+@media (max-width: 580px) {
+  .bp-print__bg {
+    -webkit-mask-image: radial-gradient(circle at 50% 30%, #fff 0, transparent 40%);
+            mask-image: radial-gradient(circle at 50% 30%, #fff 0, transparent 40%);
+  }
+}
+
+/* — Blueprint reveals — */
+[data-fade-in] { opacity: 0; transition: opacity 1s ease-in; transition-delay: var(--d, 0s); }
+[data-fade-in].show { opacity: 1; }
+
+[data-fade-in-y] {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: transform 1s cubic-bezier(.26,.1,0,1), opacity 1s ease-in;
+  transition-delay: var(--d, 0s);
+}
+[data-fade-in-y].show { opacity: 1; transform: none; }
+
+/* — SmartText line mask — */
+.smartText { display: block; }
+.smartText .line { display: block; overflow: hidden; }
+.smartText .line .text {
+  display: inline-block;
+  white-space: normal;
+  will-change: transform;
+  transition: transform 1.2s cubic-bezier(.65,.2,0,1);
+}
+.smartText:not(.show) .line .text { transform: translateY(110%); }
+.smartText.show .line .text { transform: none; }
+.smartText .line:nth-child(1) .text { transition-delay: .05s; }
+.smartText .line:nth-child(2) .text { transition-delay: .15s; }
+.smartText .line:nth-child(3) .text { transition-delay: .25s; }
+.smartText .line:nth-child(4) .text { transition-delay: .35s; }
+
+/* — Blueprint kicker — */
+.bp-kicker {
+  display: inline-flex; align-items: center; gap: 10px;
+  color: #c496ff; font-family: Saans Mono, ui-monospace, monospace;
+  font-size: 13px; letter-spacing: 0.02em;
+}
+.bp-kicker::before {
+  content: ""; width: 9px; height: 9px; border-radius: 3px; background: currentColor;
+  flex: none;
+}
+
+/* — hero load fade (staggered via --d) — */
+[data-hero-fade] { transition-property: opacity; transition-duration: .7s; transition-delay: var(--d, 0s); }
+
+/* — Lenis — */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-stopped { overflow: hidden; }
+
+html.menu-open { overflow: hidden !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-fade-in], [data-fade-in-y], .smartText .line .text {
+    transition: none !important; transform: none !important; opacity: 1 !important;
+  }
+}

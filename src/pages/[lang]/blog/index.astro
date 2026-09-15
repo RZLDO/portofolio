@@ -1,0 +1,50 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import id from '../../../i18n/id.json';
+import en from '../../../i18n/en.json';
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'id' } }, { params: { lang: 'en' } }];
+}
+
+const { lang } = Astro.params;
+const t = lang === 'en' ? en : id;
+const posts = (await getCollection('blog', ({ data }) => data.lang === lang)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const emptyText = lang === 'id' ? 'Belum ada tulisan dalam bahasa ini.' : 'No posts in this language yet.';
+const fmtDate = (d: Date) => d.toLocaleDateString(lang === 'id' ? 'id-ID' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base title={`${t.blog.title} — Rizaldo Setiawan`} description={t.blog.subtitle} lang={lang === 'en' ? 'en' : 'id'}>
+  <main class="mx-[var(--margin)] pb-24 pt-28">
+    <a href={`/${lang}`} class="font-mono text-xs uppercase tracking-[0.12em] text-[#b9b9b4] transition-colors hover:text-[#c496ff]">← {lang === 'id' ? 'Beranda' : 'Home'}</a>
+    <h1 class="mt-8 font-display text-4xl font-light tracking-[-0.01em] sm:text-5xl" data-fade-in>{t.blog.title}</h1>
+    <p class="mt-3 max-w-xl text-[15px] text-[#b9b9b4]" data-fade-in style="--d:.1s">{t.blog.subtitle}</p>
+
+    <div class="mt-12 border-t border-white/15" data-fade-in>
+      <div class="hidden grid-cols-[130px_1fr_170px] gap-6 border-b border-white/[0.08] pb-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[#b9b9b4] md:grid">
+        <span>{lang === 'id' ? 'Tanggal' : 'Date'}</span>
+        <span>{lang === 'id' ? 'Artikel' : 'Article'}</span>
+        <span class="text-right">Tags</span>
+      </div>
+      {posts.map((post, i) => (
+        <a href={`/${lang}/blog/${post.slug}`} class="group grid gap-2 border-b border-white/[0.08] py-7 transition-opacity duration-300 hover:opacity-70 md:grid-cols-[130px_1fr_170px] md:gap-6" data-fade-in-y style={`--d:${Math.min(i, 4) * 0.05}s`}>
+          <time datetime={post.data.pubDate.toISOString()} class="font-mono text-xs text-[#b9b9b4]">{fmtDate(post.data.pubDate)}</time>
+          <div>
+            <h2 class="font-display text-lg text-[#f7f5f2] transition-colors group-hover:text-[#c496ff]">{post.data.title}</h2>
+            <p class="mt-1.5 text-[13px] leading-relaxed text-[#b9b9b4]">{post.data.description}</p>
+          </div>
+          <div class="flex flex-wrap content-start gap-1.5 md:justify-end">
+            {post.data.tags.map((tag) => (
+              <span class="rounded-md border border-white/10 px-2 py-1 font-mono text-[10px] text-[#b9b9b4]">#{tag}</span>
+            ))}
+          </div>
+        </a>
+      ))}
+    </div>
+
+    {posts.length === 0 && <p class="mt-10 text-sm text-[#b9b9b4]">{emptyText}</p>}
+  </main>
+</Base>

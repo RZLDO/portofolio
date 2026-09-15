@@ -1,0 +1,44 @@
+---
+import { profile, experience, achievements } from '../data/profile';
+const { t, lang } = Astro.props;
+const stats = [
+  { v: '5+', d: { id: 'App dirilis ke Play Store', en: 'Apps shipped to Play Store' } },
+  { v: String(experience.length), d: { id: 'Pengalaman kerja', en: 'Work experiences' } },
+  { v: '3.75', d: { id: 'GPA — Teknik Informatika', en: 'GPA — Informatics Engineering' } },
+];
+---
+
+<section id="about" class="mx-[var(--margin)] scroll-mt-24 py-20 md:py-28">
+  <div class="grid gap-12 md:grid-cols-2 md:gap-10">
+    <div data-fade-in>
+      <p class="bp-kicker">{t.about.title}</p>
+      <h2 class="smartText mt-6 font-display text-3xl font-light leading-tight sm:text-4xl" data-reveal>
+        <span class="line"><span class="text">{lang === 'id' ? 'Membangun aplikasi,' : 'Building apps,'}</span></span>
+        <span class="line"><span class="text">{lang === 'id' ? 'dari mobile ke backend.' : 'from mobile to backend.'}</span></span>
+      </h2>
+      <p class="mt-6 max-w-lg text-[15px] leading-relaxed text-[#b9b9b4]">{profile.bio[lang]}</p>
+      <div class="mt-7 flex gap-3">
+        <a href={profile.links.linkedin} target="_blank" rel="noreferrer" class="rounded-md bg-[#f7f5f2] px-4 py-2.5 font-mono text-[12px] font-medium text-[#1b1b1b] transition-colors duration-500 hover:bg-[#c496ff]">LinkedIn ↗</a>
+        <a href={profile.links.github} target="_blank" rel="noreferrer" class="rounded-md border border-white/15 px-4 py-2.5 font-mono text-[12px] text-[#f7f5f2] transition-colors duration-500 hover:border-[#c496ff]/60 hover:text-[#c496ff]">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="flex flex-col justify-center" data-fade-in-y style="--d:.15s">
+      {stats.map((s) => (
+        <div class="flex items-baseline gap-6 border-t border-white/10 py-6 last:border-b">
+          <span class="w-24 shrink-0 font-display text-4xl font-light text-[#c496ff] sm:text-5xl">{s.v}</span>
+          <span class="font-mono text-xs uppercase tracking-[0.12em] text-[#b9b9b4]">{s.d[lang]}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="mt-10 grid gap-4 sm:grid-cols-3">
+    {achievements.map((a, i) => (
+      <div class="rounded-xl border border-white/[0.06] bg-[#242424]/60 p-5" data-fade-in-y style={`--d:${0.2 + i * 0.08}s`}>
+        <span class="text-xl">{a.icon}</span>
+        <p class="mt-3 text-sm font-medium text-[#f7f5f2]">{a.title[lang]}</p>
+        <p class="mt-1.5 text-xs leading-relaxed text-[#b9b9b4]">{a.detail[lang]}</p>
+      </div>
+    ))}
+  </div>
+</section>

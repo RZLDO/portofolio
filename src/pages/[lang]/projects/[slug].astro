@@ -1,0 +1,50 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { projects } from '../../../data/profile';
+import id from '../../../i18n/id.json';
+import en from '../../../i18n/en.json';
+
+export function getStaticPaths() {
+  const paths: { params: { lang: string; slug: string } }[] = [];
+  for (const lang of ['id', 'en']) {
+    for (const p of projects) {
+      paths.push({ params: { lang, slug: p.slug } });
+    }
+  }
+  return paths;
+}
+
+const { lang, slug } = Astro.params;
+const t = lang === 'en' ? en : id;
+const project = projects.find((p) => p.slug === slug)!;
+---
+
+<Base title={`${project.title} — Rizaldo Setiawan`} description={project.summary[lang]} lang={lang === 'en' ? 'en' : 'id'}>
+  <main class="mx-[var(--margin)] pb-24 pt-28">
+    <a href={`/${lang}#projects`} class="font-mono text-xs uppercase tracking-[0.12em] text-[#b9b9b4] transition-colors hover:text-[#c496ff]">← {t.projects.title}</a>
+
+    <div class="mt-10 grid items-start gap-10 lg:grid-cols-[1.05fr_0.95fr]">
+      <div data-fade-in>
+        <p class="bp-kicker">{t.projects.role} · {project.role[lang]}</p>
+        <h1 class="mt-4 font-display text-4xl font-light leading-tight tracking-[-0.01em] sm:text-5xl">{project.title}</h1>
+        <p class="mt-5 max-w-xl text-[15px] leading-relaxed text-[#b9b9b4]">{project.description[lang]}</p>
+        <div class="mt-6 flex flex-wrap gap-2">
+          {project.tech.map((tech) => (
+            <span class="rounded-md border border-white/10 px-3 py-1.5 font-mono text-[11px] text-[#f7f5f2]/75">{tech}</span>
+          ))}
+        </div>
+        <div class="mt-9 flex flex-wrap gap-3">
+          {project.playStore && (
+            <a href={project.playStore} target="_blank" rel="noreferrer" class="rounded-md bg-[#f7f5f2] px-6 py-3 font-mono text-[13px] font-medium text-[#1b1b1b] transition-colors duration-500 hover:bg-[#c496ff]">{t.projects.demo} ↗</a>
+          )}
+          {project.appStore && (
+            <a href={project.appStore} target="_blank" rel="noreferrer" class="rounded-md border border-white/15 px-6 py-3 font-mono text-[13px] text-[#f7f5f2] transition-colors duration-500 hover:border-[#c496ff]/60 hover:text-[#c496ff]">{t.projects.appstore} ↗</a>
+          )}
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-2xl border border-white/[0.06] bg-[#242424] p-2" data-fade-in-y style="--d:.15s">
+        <img src={project.image} alt={project.title} width="800" height="600" class="w-full rounded-xl object-cover" loading="eager" />
+      </div>
+    </div>
+  </main>
+</Base>

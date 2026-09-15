@@ -1,0 +1,16 @@
+---
+import { profile } from '../data/profile';
+const { t } = Astro.props;
+---
+
+<section id="skills" class="mx-[var(--margin)] scroll-mt-24 border-t border-white/10 py-20 md:py-24">
+  <div class="flex flex-wrap items-baseline justify-between gap-4">
+    <p class="bp-kicker" data-fade-in>{t.skills.title}</p>
+    <p class="font-mono text-xs text-[#b9b9b4]" data-fade-in style="--d:.1s">{profile.skills.length} technologies</p>
+  </div>
+  <div class="mt-8 flex flex-wrap gap-2" data-fade-in-y>
+    {profile.skills.map((s) => (
+      <span class="rounded-md border border-white/10 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.06em] text-[#f7f5f2]/80 transition-colors duration-300 hover:border-[#c496ff]/60 hover:text-[#c496ff]">{s}</span>
+    ))}
+  </div>
+</section>

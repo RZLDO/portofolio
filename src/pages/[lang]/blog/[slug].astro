@@ -1,0 +1,43 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+import id from '../../../i18n/id.json';
+import en from '../../../i18n/en.json';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { lang: post.data.lang, slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { lang } = Astro.params;
+const t = lang === 'en' ? en : id;
+const { Content } = await post.render();
+const fmtDate = post.data.pubDate.toLocaleDateString(lang === 'id' ? 'id-ID' : 'en-US', { day: 'numeric', month: 'long', year: 'numeric' });
+---
+
+<Base title={`${post.data.title} — Rizaldo Setiawan`} description={post.data.description} lang={lang === 'en' ? 'en' : 'id'}>
+  <main class="mx-auto max-w-[700px] px-[var(--margin)] pb-24 pt-28">
+    <a href={`/${lang}/blog`} class="font-mono text-xs uppercase tracking-[0.12em] text-[#b9b9b4] transition-colors hover:text-[#c496ff]">← {t.blog.title}</a>
+    <article class="mt-8" data-fade-in>
+      <div class="flex flex-wrap items-center gap-3">
+        <time datetime={post.data.pubDate.toISOString()} class="font-mono text-[11px] uppercase tracking-[0.14em] text-[#c496ff]">{fmtDate}</time>
+        {post.data.tags.length > 0 && (
+          <div class="flex flex-wrap gap-1.5">
+            {post.data.tags.map((tag) => (
+              <span class="rounded-md border border-white/10 px-2 py-0.5 font-mono text-[10px] text-[#b9b9b4]">#{tag}</span>
+            ))}
+          </div>
+        )}
+      </div>
+      <h1 class="mt-5 font-display text-3xl font-light leading-tight tracking-[-0.01em] sm:text-4xl">{post.data.title}</h1>
+      <p class="mt-4 border-l-2 border-[#c496ff]/40 pl-4 text-[15px] leading-relaxed text-[#b9b9b4]">{post.data.description}</p>
+      <div class="prose prose-invert mt-10 max-w-none prose-headings:font-display prose-headings:font-light prose-a:text-[#c496ff] prose-code:text-[#c496ff] prose-pre:rounded-xl prose-pre:border prose-pre:border-white/10 prose-img:rounded-xl">
+        <Content />
+      </div>
+    </article>
+  </main>
+</Base>

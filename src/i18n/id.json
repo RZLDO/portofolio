@@ -1,0 +1,31 @@
+{
+  "nav": { "about": "Tentang", "skills": "Skill", "projects": "Proyek", "experience": "Pengalaman", "blog": "Blog", "contact": "Kontak" },
+  "blog": { "title": "Blog", "subtitle": "Catatan seputar Android, Flutter, dan pelajaran dari production." },
+  "hero": {
+    "greeting": "Halo, saya",
+    "ctaProjects": "Lihat Proyek",
+    "ctaCv": "Download CV"
+  },
+  "about": { "title": "Tentang Saya" },
+  "services": { "title": "Yang Saya Kerjakan" },
+  "skills": { "title": "Skill & Teknologi" },
+  "projects": {
+    "title": "Proyek Pilihan",
+    "subtitle": "Aplikasi yang pernah saya bangun — dari konsep hingga rilis di Play Store.",
+    "detail": "Studi Kasus",
+    "demo": "Play Store",
+    "appstore": "App Store",
+    "code": "Kode",
+    "role": "Peran"
+  },
+  "experience": { "title": "Pengalaman", "educationTitle": "Pendidikan", "courses": "Mata Kuliah" },
+  "contact": {
+    "title": "Mari Berkolaborasi",
+    "body": "Punya proyek atau peluang menarik? Hubungi saya — saya selalu terbuka untuk diskusi.",
+    "name": "Nama",
+    "email": "Email",
+    "message": "Pesan",
+    "send": "Kirim Pesan",
+    "wa": "Chat WhatsApp"
+  }
+}

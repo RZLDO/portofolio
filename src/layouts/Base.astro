@@ -1,0 +1,60 @@
+---
+interface Props { title:string; description:string; lang?:'id'|'en'; image?:string; }
+const { title, description, lang='id', image='/profile.png' } = Astro.props;
+import '../styles/global.css';
+const canonical = Astro.site ? new URL(Astro.url.pathname, Astro.site).toString() : Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#1b1b1b" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="bp-print" aria-hidden="true"><div class="bp-print__bg"></div><div class="bp-print__static"></div></div>
+    <slot />
+    <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js" defer></script>
+    <script>
+      window.addEventListener('DOMContentLoaded', () => {
+        // @ts-ignore Lenis smooth scroll
+        if (window.Lenis) new window.Lenis({ autoRaf: true, lerp: 0.09 });
+
+        // reveal observer for below-fold Blueprint primitives
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) { e.target.classList.add('show'); io.unobserve(e.target); }
+          }
+        }, { threshold: 0.15 });
+        document.querySelectorAll('[data-fade-in], [data-fade-in-y], .smartText[data-reveal]').forEach((el) => io.observe(el));
+
+        // mouse parallax for floating items
+        const items = document.querySelectorAll('[data-parallax]');
+        if (items.length && window.matchMedia('(pointer: fine)').matches) {
+          let mx = 0, my = 0;
+          window.addEventListener('mousemove', (e) => {
+            mx = (e.clientX / window.innerWidth - 0.5) * 2;
+            my = (e.clientY / window.innerHeight - 0.5) * 2;
+          });
+          const loop = () => {
+            items.forEach((el) => {
+              const f = parseFloat(el.getAttribute('data-parallax') || '0.04');
+              el.style.transform = `translate3d(${(mx * f * 40).toFixed(1)}px, ${(my * f * 40).toFixed(1)}px, 0)`;
+            });
+            requestAnimationFrame(loop);
+          };
+          loop();
+        }
+      });
+    </script>
+  </body>
+</html>

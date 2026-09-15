@@ -1,0 +1,95 @@
+---
+import { profile, experience, projects } from '../data/profile';
+const { t, lang } = Astro.props;
+const current = experience[0];
+const floats = [
+  { src: '/projects/raja-derek.png', pos: 'left-[5%] top-[16%] w-[260px]', ratio: 'aspect-[4/3]', rot: -7, f: 0.05 },
+  { src: '/projects/wisnu.png', pos: 'right-[6%] top-[14%] w-[220px]', ratio: 'aspect-[3/4]', rot: 9, f: 0.07 },
+  { src: '/projects/sajan.png', pos: 'bottom-[14%] left-[9%] w-[230px]', ratio: 'aspect-[3/4]', rot: 6, f: 0.04 },
+  { src: '/projects/simpel.png', pos: 'bottom-[16%] right-[8%] w-[250px]', ratio: 'aspect-[7/5]', rot: -9, f: 0.06 },
+];
+---
+
+<section id="heroSection" class="relative flex min-h-[100svh] items-center justify-center overflow-hidden px-6 pb-20 pt-28">
+  <!-- floating project screenshots: stack in center on load, then scatter out -->
+  <div class="pointer-events-none absolute inset-0 hidden md:block" aria-hidden="true">
+    {floats.map((f) => (
+      <div class={`scatter-item absolute ${f.pos}`}>
+        <div data-parallax={String(f.f).replace('0.', '0.0')} class="will-change-transform">
+          <div class={`${f.ratio} overflow-hidden rounded-xl border border-white/[0.06] bg-[#242424] shadow-2xl shadow-black/50`} style={`transform: rotate(${f.rot}deg)`}>
+            <img src={f.src} alt="" class="h-full w-full object-cover opacity-80" loading="eager" />
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <div class="relative mx-auto max-w-3xl text-center">
+    <p class="bp-kicker justify-center opacity-0 transition-opacity duration-700" data-hero-fade style="--d:.55s">{t.hero.greeting}</p>
+    <h1 class="smartText mt-5 font-display text-5xl font-light leading-[1.02] tracking-[-0.02em] sm:text-6xl md:text-7xl">
+      <span class="line"><span class="text">Rizaldo</span></span>
+      <span class="line"><span class="text">Setiawan</span></span>
+    </h1>
+    <p class="mt-5 font-display text-lg text-[#c496ff] sm:text-xl opacity-0 transition-opacity duration-700" data-hero-fade style="--d:.8s">{profile.role[lang]}</p>
+    <p class="mx-auto mt-3 max-w-xl font-mono text-[13px] leading-relaxed text-[#b9b9b4] opacity-0 transition-opacity duration-700" data-hero-fade style="--d:.9s">
+      {lang === 'id' ? 'Saat ini' : 'Currently'} · {current.title} — {current.org}
+    </p>
+    <p class="mx-auto mt-5 max-w-xl text-base leading-relaxed text-[#b9b9b4] opacity-0 transition-opacity duration-700" data-hero-fade style="--d:1s">{profile.tagline[lang]}</p>
+    <div class="mt-9 flex flex-wrap items-center justify-center gap-3 opacity-0 transition-all duration-700 ease-out" data-hero-fade style="--d:1.1s">
+      <a href="#projects" class="rounded-md bg-[#f7f5f2] px-6 py-3 font-mono text-[13px] font-medium text-[#1b1b1b] transition-colors duration-500 hover:bg-[#c496ff]">
+        {t.hero.ctaProjects} →
+      </a>
+      <a href="/cv.pdf" download class="rounded-md border border-white/15 px-6 py-3 font-mono text-[13px] text-[#f7f5f2] transition-colors duration-500 hover:border-[#c496ff]/60 hover:text-[#c496ff]">
+        {t.hero.ctaCv} ↓
+      </a>
+    </div>
+    <dl class="mx-auto mt-12 grid max-w-md grid-cols-3 divide-x divide-white/10 border-y border-white/10 py-5 opacity-0 transition-opacity duration-700" data-hero-fade style="--d:1.25s">
+      <div><dt class="font-display text-2xl">5+</dt><dd class="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#b9b9b4]">Play Store</dd></div>
+      <div><dt class="font-display text-2xl">{experience.length}</dt><dd class="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#b9b9b4]">{lang === 'id' ? 'Pengalaman' : 'Experience'}</dd></div>
+      <div><dt class="font-display text-2xl">{projects.length}</dt><dd class="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-[#b9b9b4]">{lang === 'id' ? 'Proyek' : 'Projects'}</dd></div>
+    </dl>
+  </div>
+</section>
+
+<script>
+  const hero = document.getElementById('heroSection');
+  const items = Array.from(document.querySelectorAll('.scatter-item'));
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function runIntro() {
+    // text fades in via --d delays
+    document.querySelectorAll('[data-hero-fade]').forEach((el) => el.classList.add('opacity-100'));
+    const title = hero?.querySelector('.smartText');
+    setTimeout(() => title?.classList.add('show'), 450);
+    if (reduced || !hero || items.length === 0) return;
+
+    // 1) stack everything in the center
+    const hr = hero.getBoundingClientRect();
+    items.forEach((el) => {
+      const r = el.getBoundingClientRect();
+      const dx = hr.left + hr.width / 2 - (r.left + r.width / 2);
+      const dy = hr.top + hr.height / 2 - (r.top + r.height / 2);
+      el.dataset.dx = String(dx);
+      el.dataset.dy = String(dy);
+      el.style.transition = 'none';
+      el.style.transform = `translate(${dx}px, ${dy}px) scale(0.75)`;
+      el.style.opacity = '0';
+    });
+
+    // force reflow so the stacked state is committed
+    void (hero as HTMLElement).offsetWidth;
+
+    // 2) scatter out to corners, staggered
+    items.forEach((el, i) => {
+      (el as HTMLElement).style.transition = `transform 1.4s cubic-bezier(.22,1,.36,1) ${0.35 + i * 0.14}s, opacity 0.6s ease ${0.35 + i * 0.14}s`;
+      el.style.transform = '';
+      el.style.opacity = '1';
+    });
+  }
+
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    requestAnimationFrame(() => requestAnimationFrame(runIntro));
+  } else {
+    window.addEventListener('DOMContentLoaded', () => requestAnimationFrame(() => requestAnimationFrame(runIntro)));
+  }
+</script>

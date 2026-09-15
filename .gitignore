@@ -20,5 +20,8 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
+# source PDFs (sudah diekstrak; file mentah 25MB tidak perlu di-repo)
+docs/*.pdf
+
 # jetbrains setting folder
 .idea/

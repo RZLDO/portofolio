@@ -1,0 +1,28 @@
+---
+title: 'Shipping 5 Apps to the Play Store: What I Learned'
+description: 'Lessons from publishing five production apps — from government portals to ride-hailing services.'
+pubDate: 2025-04-15
+lang: en
+tags: ['android', 'play-store', 'production']
+---
+
+I have shipped five apps to the Google Play Store, from a government information portal to a tow truck ride-hailing service. Each release taught me something new.
+
+## Release Is a Feature
+
+The gap between "it works on my emulator" and "it works for users" is enormous. Play Console pre-launch reports, internal testing tracks, and staged rollouts exist for a reason — use them.
+
+## Things I Always Check Before Release
+
+1. **ProGuard/R8 rules.** A stripped class crashes production, not your debug build.
+2. **Offline states.** Users open apps in elevators. Every screen deserves an offline fallback.
+3. **Localization completeness.** I once shipped a mixed-language screen because a string was hardcoded. Never again.
+4. **Deep link and intent filters.** Test them from a real link, not just ADB.
+
+## The Store Listing Matters
+
+Screenshots, feature graphics, and the short description drive conversions more than we engineers like to admit. On Sajan, refreshing screenshots lifted install conversion noticeably with zero code changes.
+
+## Closing
+
+Shipping is a skill you build by repeating. The fifth release was exponentially smoother than the first — not because the code got easier, but because the checklist got better.

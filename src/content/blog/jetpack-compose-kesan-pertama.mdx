@@ -1,0 +1,38 @@
+---
+title: 'Jetpack Compose: Kesan Pertama Setelah 2 Tahun'
+description: 'Refleksi migrasi dari XML ke Jetpack Compose — apa yang bikin saya betah, dan apa yang masih jadi tantangan.'
+pubDate: 2025-08-10
+lang: id
+tags: ['android', 'kotlin', 'jetpack-compose']
+---
+
+Saat pertama kali pindah dari XML layout ke Jetpack Compose di proyek Wisnu, saya sempat skeptis. Ternyata dua tahun kemudian, saya nggak mau balik lagi.
+
+## Kenapa Compose Terasa Berbeda
+
+Dengan XML, UI adalah sesuatu yang kamu *deklarasikan lalu kamu render*. Dengan Compose, UI adalah **fungsi Kotlin biasa**:
+
+```kotlin
+@Composable
+fun Greeting(name: String) {
+    Text(text = "Halo, $name!")
+}
+```
+
+Nggak ada XML, nggak ada `findViewById`, nggak ada ViewBinding. UI kamu hidup di dunia Kotlin yang sama dengan logic-nya.
+
+## Yang Paling Terasa di Production
+
+Tiga hal yang paling membantu tim saya:
+
+1. **State-driven UI.** Saat state berubah, UI ikut berubah. Nggak perlu mikirin "view mana yang harus di-update".
+2. **Reusability nyata.** Custom component jadi semudah membuat fungsi baru — bukan custom View dengan attrs XML.
+3. **Preview yang cepat.** `@Preview` + live edit mempercepat iterasi UI drastis.
+
+## Tantangannya
+
+Compose bukan tanpa learning curve. Recomposition, stability, dan `remember` awalnya membingungkan. Saran saya: pahami dulu bagaimana Compose *menggambar ulang* UI sebelum optimasi apa pun.
+
+## Kesimpulan
+
+Untuk proyek Android baru, saya selalu rekomendasikan mulai dari Compose. Ekosistemnya sudah matang, dan interop dengan View lama tetap ada kalau kamu butuh transisi bertahap.

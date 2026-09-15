@@ -1,0 +1,49 @@
+---
+import { profile } from '../data/profile';
+const { t, lang } = Astro.props;
+const formAction = 'https://formspree.io/f/xxxxxx';
+const waLink = `https://wa.me/${profile.phone.replace(/[^0-9]/g, '')}`;
+---
+
+<section id="contact" class="scroll-mt-24 border-t border-white/10 px-[var(--margin)] py-20 md:py-28">
+  <div class="mx-auto grid max-w-5xl gap-6 md:grid-cols-[0.9fr_1.1fr]">
+    <div class="rounded-2xl bg-[#f7f5f2] p-7 text-[#1b1b1b] md:p-9" data-fade-in>
+      <p class="font-mono text-xs uppercase tracking-[0.14em] text-[#8942e4]">{lang === 'id' ? 'Terbuka untuk peluang' : 'Open to opportunities'}</p>
+      <h2 class="mt-4 font-display text-3xl font-light leading-tight">{t.contact.title}</h2>
+      <p class="mt-4 text-[15px] leading-relaxed text-[#454543]">{t.contact.body}</p>
+      <a href={waLink} target="_blank" rel="noreferrer" class="mt-8 inline-flex rounded-md bg-[#1b1b1b] px-6 py-3 font-mono text-[13px] font-medium text-[#f7f5f2] transition-colors duration-500 hover:bg-[#8942e4]">{t.contact.wa} →</a>
+      <div class="mt-9 space-y-2 border-t border-[#1b1b1b]/10 pt-6 text-[13px]">
+        <p><span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6b5a48]">Email</span><br /><a href={`mailto:${profile.email}`} class="underline decoration-[#1b1b1b]/20 underline-offset-4 hover:text-[#8942e4]">{profile.email}</a></p>
+        <p><span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6b5a48]">WA</span><br /><span>{profile.phone}</span></p>
+        <p><span class="font-mono text-[11px] uppercase tracking-[0.1em] text-[#6b5a48]">{lang === 'id' ? 'Lokasi' : 'Location'}</span><br /><span>{profile.location[lang === 'id' ? 'id' : 'en']}</span></p>
+      </div>
+    </div>
+
+    <form action={formAction} method="POST" class="rounded-2xl border border-white/[0.06] bg-[#242424]/60 p-7 md:p-9" data-fade-in-y style="--d:.15s">
+      <div class="grid gap-5 sm:grid-cols-2">
+        <label class="flex flex-col gap-2">
+          <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#b9b9b4]">{t.contact.name}</span>
+          <input name="name" required placeholder={t.contact.name} class="w-full border-b border-white/15 bg-transparent py-2.5 text-sm text-[#f7f5f2] placeholder:text-[#b9b9b4]/50 focus:border-[#c496ff] focus:outline-none" />
+        </label>
+        <label class="flex flex-col gap-2">
+          <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#b9b9b4]">{t.contact.email}</span>
+          <input name="email" type="email" required placeholder={t.contact.email} class="w-full border-b border-white/15 bg-transparent py-2.5 text-sm text-[#f7f5f2] placeholder:text-[#b9b9b4]/50 focus:border-[#c496ff] focus:outline-none" />
+        </label>
+      </div>
+      <label class="mt-6 flex flex-col gap-2">
+        <span class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#b9b9b4]">{t.contact.message}</span>
+        <textarea name="message" required rows="5" placeholder={t.contact.message} class="w-full resize-none rounded-lg border border-white/10 bg-transparent p-3.5 text-sm text-[#f7f5f2] placeholder:text-[#b9b9b4]/50 focus:border-[#c496ff] focus:outline-none"></textarea>
+      </label>
+      <button class="mt-7 inline-flex items-center gap-2 rounded-md bg-[#f7f5f2] px-6 py-3 font-mono text-[13px] font-medium text-[#1b1b1b] transition-colors duration-500 hover:bg-[#c496ff]">{t.contact.send} →</button>
+      <div class="mt-7 flex gap-4 border-t border-white/[0.06] pt-5">
+        <a href={profile.links.linkedin} target="_blank" rel="noreferrer" class="font-mono text-xs text-[#b9b9b4] transition-colors hover:text-[#c496ff]">LinkedIn ↗</a>
+        <a href={profile.links.github} target="_blank" rel="noreferrer" class="font-mono text-xs text-[#b9b9b4] transition-colors hover:text-[#c496ff]">GitHub ↗</a>
+      </div>
+    </form>
+  </div>
+
+  <footer class="mx-auto mt-16 flex max-w-5xl flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-7 font-mono text-[11px] text-[#b9b9b4]">
+    <span>© {new Date().getFullYear()} {profile.name} · Bandung, Indonesia</span>
+    <span>Built with Astro</span>
+  </footer>
+</section>

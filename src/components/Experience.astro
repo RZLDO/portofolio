@@ -1,0 +1,57 @@
+---
+import { experience, education } from '../data/profile';
+const { t, lang } = Astro.props;
+---
+
+<section id="experience" class="mx-[var(--margin)] scroll-mt-24 border-t border-white/10 py-20 md:py-28">
+  <p class="bp-kicker" data-fade-in>{t.experience.title}</p>
+
+  <!-- desktop: table -->
+  <div class="mt-10 hidden md:block">
+    <div class="grid grid-cols-[2fr_1fr_1fr] gap-6 border-b border-white/15 pb-3 font-mono text-[11px] uppercase tracking-[0.12em] text-[#b9b9b4]">
+      <span>{lang === 'id' ? 'Peran — Organisasi' : 'Role — Organization'}</span>
+      <span>{lang === 'id' ? 'Periode' : 'Period'}</span>
+      <span class="text-right">{lang === 'id' ? 'Lokasi' : 'Location'}</span>
+    </div>
+    {experience.map((e) => (
+      <div class="grid grid-cols-[2fr_1fr_1fr] gap-6 border-b border-white/[0.08] py-6" data-fade-in-y>
+        <div>
+          <p class="font-display text-base text-[#f7f5f2]">{e.title} <span class="text-[#b9b9b4]">· {e.org}</span></p>
+          <ul class="mt-2 space-y-1">
+            {e.points[lang].slice(0, 2).map((pt) => (
+              <li class="text-[13px] leading-relaxed text-[#b9b9b4]">— {pt}</li>
+            ))}
+          </ul>
+        </div>
+        <span class="font-mono text-xs text-[#b9b9b4]">{e.period}</span>
+        <span class="text-right font-mono text-xs text-[#b9b9b4]">{e.location}</span>
+      </div>
+    ))}
+  </div>
+
+  <!-- mobile: list -->
+  <ol class="mt-8 space-y-8 md:hidden">
+    {experience.map((e, i) => (
+      <li data-fade-in-y style={`--d:${Math.min(i, 4) * 0.05}s`}>
+        <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#c496ff]">{e.period} · {e.location}</p>
+        <h3 class="mt-2 font-display text-base text-[#f7f5f2]">{e.title} <span class="text-[#b9b9b4]">· {e.org}</span></h3>
+        <ul class="mt-3 space-y-1.5">
+          {e.points[lang].map((pt) => (
+            <li class="text-[13px] leading-relaxed text-[#b9b9b4]">— {pt}</li>
+          ))}
+        </ul>
+      </li>
+    ))}
+  </ol>
+
+  <!-- education -->
+  <div class="mt-12 rounded-2xl border border-[#c496ff]/20 bg-[#c496ff]/[0.04] p-6 md:p-8" data-fade-in-y>
+    <p class="bp-kicker">{t.experience.educationTitle}</p>
+    <div class="mt-5 flex flex-wrap items-baseline justify-between gap-2">
+      <h3 class="font-display text-xl text-[#f7f5f2]">{education.school}</h3>
+      <p class="font-mono text-xs text-[#b9b9b4]">{education.period}</p>
+    </div>
+    <p class="mt-2 text-sm text-[#f7f5f2]/85">{education.degree[lang]} · GPA {education.gpa}</p>
+    <p class="mt-2 text-[13px] leading-relaxed text-[#b9b9b4]"><span class="text-[#f7f5f2]/75">{t.experience.courses}:</span> {education.courses[lang]}</p>
+  </div>
+</section>

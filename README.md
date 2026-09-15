@@ -1,43 +1,62 @@
-# Astro Starter Kit: Minimal
+# Portofolio — Rizaldo Setiawan
+
+Personal portfolio: **Mobile & Backend Developer** — Kotlin, Jetpack Compose, Flutter, dan REST API (Bun, Hono, PostgreSQL).
+
+## Stack
+
+- [Astro 4](https://astro.build) — static site generator
+- [Tailwind CSS](https://tailwindcss.com) + [@tailwindcss/typography](https://tailwindcss.com/docs/typography-plugin)
+- [MDX](https://mdxjs.com) via `@astrojs/mdx` — blog content collections
+- [Lenis](https://lenis.darkroom.engineering) — smooth scroll
+- Blueprint-style dark design: line-mask text reveal, fade-in-y sections, stack-to-scatter hero, mouse parallax
+
+## Struktur
+
+```
+src/
+  components/    Hero, Navbar, Services, About, Skills, Projects, Experience, Contact
+  content/blog/  artikel MDX (frontmatter: title, description, pubDate, lang, tags)
+  data/          profile.ts — semua konten (bio, skills, proyek, pengalaman, pendidikan)
+  i18n/          id.json, en.json — string UI dua bahasa
+  layouts/       Base.astro — tokens, reveal observers, Lenis, print grid
+  pages/
+    [lang]/            index, projects/[slug], blog/index, blog/[slug]
+public/
+  cv.pdf         tombol "Download CV"
+  profile.png    foto profil
+  projects/      screenshot proyek
+```
+
+## Develop
+
+Butuh Node >= 18 (proyek ini dijalankan dengan Node 20):
 
 ```sh
-npm create astro@latest -- --template minimal
+export PATH="$HOME/.nvm/versions/node/v20.20.0/bin:$PATH"
+npm install
+npm run dev      # http://localhost:4321
+npm run build    # output statis ke dist/
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Menulis blog
 
-## 🚀 Project Structure
+Tambah file `.mdx` di `src/content/blog/`:
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```mdx
+---
+title: 'Judul Artikel'
+description: 'Ringkasan 1-2 kalimat.'
+pubDate: 2025-09-15
+lang: id          # atau 'en'
+tags: ['android']
+---
+Isi artikel...
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Deploy
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Output 100% statis — tinggal import repo ini ke [Vercel](https://vercel.com/new) / Netlify / Cloudflare Pages, tanpa konfigurasi tambahan.
 
-Any static assets, like images, can be placed in the `public/` directory.
+## TODO
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+- [ ] Ganti endpoint Formspree di `src/components/Contact.astro` (`https://formspree.io/f/xxxxxx`)

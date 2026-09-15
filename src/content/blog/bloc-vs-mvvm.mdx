@@ -1,0 +1,46 @@
+---
+title: 'BloC vs MVVM: Pengalaman Memakai Keduanya'
+description: 'Saya pakai MVVM di aplikasi Kotlin dan BloC di aplikasi Flutter. Ini perbandingan jujur dari pengalaman production.'
+pubDate: 2025-06-22
+lang: id
+tags: ['flutter', 'kotlin', 'arsitektur']
+---
+
+Di Wisnu saya pakai MVVM dengan Jetpack components, sementara di Sajan dan Raja Derek saya pakai BloC dengan Flutter. Dua pola state management, dua pengalaman berbeda.
+
+## MVVM: Prediktabel dan Terstruktur
+
+MVVM dengan ViewModel + LiveData (atau StateFlow) terasa *native* di dunia Android:
+
+```kotlin
+class UserViewModel : ViewModel() {
+    private val _user = MutableStateFlow<User?>(null)
+    val user: StateFlow<User?> = _user.asStateFlow()
+}
+```
+
+UI mengamati state, ViewModel mengelola logika. Pemisahan tanggung jawabnya jelas.
+
+## BloC: Event-Driven yang Disiplin
+
+BloC memaksa kamu memikirkan aplikasi sebagai aliran **event → state**:
+
+```dart
+class UserBloc extends Bloc<UserEvent, UserState> {
+  UserBloc() : super(UserInitial()) {
+    on<LoadUser>((event, emit) async {
+      emit(UserLoading());
+      emit(UserLoaded(await repo.getUser()));
+    });
+  }
+}
+```
+
+Boilerplate-nya lebih banyak, tapi traceability-nya luar biasa — setiap perubahan state bisa dilacak ke event yang memicunya.
+
+## Kapan Pakai yang Mana?
+
+- **MVVM** untuk aplikasi Android native — tooling-nya first-class.
+- **BloC** untuk proyek Flutter yang kompleks — disiplin event-nya membayar saat aplikasi membesar.
+
+Dua-duanya menyelesaikan masalah yang sama: *state yang predictable*. Yang terbaik adalah yang tim kamu pahami.
