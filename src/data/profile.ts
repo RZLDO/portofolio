@@ -65,30 +65,48 @@ export const projects: Project[] = [
     slug: "raja-derek",
     title: "Raja Derek",
     role: {
-      id: "Mobile & Backend Developer",
-      en: "Mobile & Backend Developer",
+      id: "Android Developer",
+      en: "Android Developer",
     },
     summary: {
-      id: "Ekosistem towing real-time: aplikasi Flutter dengan live tracking & chat, plus backend sales REST API (Bun, Hono, PostgreSQL) untuk operasional lapangan.",
-      en: "Real-time towing ecosystem: Flutter app with live tracking & chat, plus a REST sales backend (Bun, Hono, PostgreSQL) for field operations.",
+      id: "Aplikasi towing real-time yang menghubungkan pelanggan dengan pengemudi derek - live tracking, chat dalam aplikasi, dan pemesanan mulus.",
+      en: "Real-time tow truck app connecting customers with drivers - live tracking, in-app chat, and seamless booking.",
     },
     description: {
-      id: "Ekosistem lengkap layanan derek real-time. Sisi mobile: aplikasi Flutter terinspirasi ride-hailing seperti Gojek - pelanggan memesan derek, melacak lokasi pengemudi, dan chat langsung; pengemudi menerima permintaan instan dengan navigasi peta dan manajemen penghasilan. Sisi backend: REST API untuk operasional sales yang saya bangun dengan Bun, Hono, dan PostgreSQL (Drizzle ORM) - pipeline prospect & quotation lengkap dengan generator PDF, pelaporan visit, dashboard KPI, notifikasi push (FCM), background workers (BullMQ + Redis), serta integrasi Fleet API untuk geocoding dan harga layanan. Deploy via Docker dengan CI Jenkins.",
-      en: "A complete real-time towing service ecosystem. Mobile side: a Flutter app inspired by ride-hailing apps like Gojek - customers request tow trucks, track drivers, and chat in-app; drivers get instant requests with map navigation and earnings management. Backend side: a sales operations REST API I built with Bun, Hono, and PostgreSQL (Drizzle ORM) - full prospect & quotation pipeline with a PDF generator, visit reporting, KPI dashboards, push notifications (FCM), background workers (BullMQ + Redis), and Fleet API integration for geocoding and service pricing. Deployed with Docker and Jenkins CI.",
+      id: "Aplikasi mobile yang menghubungkan pelanggan dengan pengemudi derek secara real-time, membuat bantuan di jalan raya lebih cepat dan efisien. Terinspirasi aplikasi ride-hailing seperti Gojek, dilengkapi live tracking, chat dalam aplikasi, dan pemesanan mulus. Pelanggan dapat memesan derek, melacak lokasi pengemudi, dan chat langsung untuk koordinasi, sementara pengemudi menerima permintaan instan, navigasi peta terintegrasi, dan manajemen penghasilan.",
+      en: "A mobile app connecting customers with tow truck drivers in real-time, making roadside assistance faster and more efficient. Inspired by ride-hailing apps like Gojek, it features live tracking, in-app chat, and seamless booking. Customers can request a tow truck, track the driver, and chat directly, while drivers get instant requests, integrated map navigation, and easy earnings management.",
+    },
+    tech: ["Flutter"],
+    image: "/projects/raja-derek.png",
+    playStore:
+      "https://play.google.com/store/apps/details?id=com.rajaderek.driver.app&hl=id",
+  },
+  {
+    slug: "salesforce-api",
+    title: "Raja Derek Salesforce",
+    role: {
+      id: "Backend Developer",
+      en: "Backend Developer",
+    },
+    summary: {
+      id: "REST API operasional sales internal: pipeline prospect & quotation, generator PDF, background workers, dan dashboard KPI untuk lapangan.",
+      en: "Internal sales operations REST API: prospect & quotation pipeline, PDF generator, background workers, and field KPI dashboards.",
+    },
+    description: {
+      id: "Backend REST API untuk operasional sales Raja Derek yang saya bangun dari nol dengan Bun, Hono, dan PostgreSQL (Drizzle ORM). Mencakup 25+ domain route - pipeline prospect & quotation lengkap dengan generator PDF, pelaporan visit, dashboard KPI, manajemen customer & produk, notifikasi push (FCM), dan integrasi Fleet API untuk geocoding serta harga layanan. Dilengkapi background workers berbasis BullMQ + Redis (notifikasi, PDF, prospect-pool), scheduler cron, autentikasi organisasi & tim (Better Auth), serta isolasi staging/production. Deploy via Docker dengan CI Jenkins.",
+      en: "The backend REST API for Raja Derek's sales operations, built from scratch with Bun, Hono, and PostgreSQL (Drizzle ORM). Covers 25+ route domains - a full prospect & quotation pipeline with PDF generation, visit reporting, KPI dashboards, customer & product management, push notifications (FCM), and Fleet API integration for geocoding and service pricing. Includes BullMQ + Redis background workers (notifications, PDF, prospect-pool), a cron scheduler, organization & team authentication (Better Auth), and staging/production isolation. Deployed with Docker and Jenkins CI.",
     },
     tech: [
-      "Flutter",
       "TypeScript",
       "Bun",
       "Hono",
       "PostgreSQL",
       "Drizzle ORM",
       "Redis",
+      "BullMQ",
       "Docker",
     ],
-    image: "/projects/raja-derek.png",
-    playStore:
-      "https://play.google.com/store/apps/details?id=com.rajaderek.driver.app&hl=id",
+    image: "/projects/salesforce-api.png",
   },
   {
     slug: "wisnu",
