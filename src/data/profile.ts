@@ -6,8 +6,8 @@ export const profile = {
     en: "Specializing in Kotlin, Jetpack Compose, and Flutter - and building REST APIs with Bun, Hono, and PostgreSQL.",
   },
   bio: {
-    id: "Lulusan Teknik Informatika yang berfokus pada pengembangan aplikasi Android dengan Kotlin, Jetpack Compose, dan Flutter. Berpengalaman membangun aplikasi dari konsep hingga rilis di Play Store, dengan keahlian dalam state management (MVVM & BloC), integrasi API, dan optimasi performa. Di pekerjaan sekarang juga membangun backend sales REST API production-grade (Bun, Hono, PostgreSQL, Redis). Alumni Bangkit Academy dengan capstone project top 20 dan tersertifikasi BNSP Junior Mobile Programmer.",
-    en: "Informatics Engineering graduate focused on Android development with Kotlin, Jetpack Compose, and Flutter. Experienced in shipping apps from conception to Play Store, with strong skills in state management (MVVM & BloC), API integration, and performance optimization. In my current role I also build production-grade sales REST APIs (Bun, Hono, PostgreSQL, Redis). Bangkit Academy alumnus with a top-20 capstone project and BNSP-certified Junior Mobile Programmer.",
+    id: "Lulusan Teknik Informatika yang berfokus pada pengembangan aplikasi Android dengan Kotlin, Jetpack Compose, dan Flutter. Berpengalaman membangun aplikasi dari konsep hingga rilis di Play Store, dengan keahlian dalam state management (MVVM, BloC, Provider, Riverpod), integrasi API, dan optimasi performa. Di pekerjaan sekarang juga membangun backend sales REST API production-grade (Bun, Hono, PostgreSQL, Redis). Alumni Bangkit Academy dengan capstone project top 20 dan tersertifikasi BNSP Junior Mobile Programmer.",
+    en: "Informatics Engineering graduate focused on Android development with Kotlin, Jetpack Compose, and Flutter. Experienced in shipping apps from conception to Play Store, with strong skills in state management (MVVM, BloC, Provider, Riverpod), API integration, and performance optimization. In my current role I also build production-grade sales REST APIs (Bun, Hono, PostgreSQL, Redis). Bangkit Academy alumnus with a top-20 capstone project and BNSP-certified Junior Mobile Programmer.",
   },
   email: "rizaldo.setiawann@gmail.com",
   phone: "+62 822-4846-7955",
@@ -27,6 +27,8 @@ export const profile = {
     "TypeScript",
     "MVVM",
     "BloC",
+    "Provider",
+    "Riverpod",
     "Firebase",
     "REST API",
     "Retrofit",
@@ -325,12 +327,12 @@ export const services = [
     items: {
       id: [
         "Android native: Kotlin, Jetpack Compose",
-        "Cross-platform: Flutter (BloC)",
+        "Cross-platform: Flutter (BloC, Provider, Riverpod)",
         "5+ app rilis ke Play Store",
       ],
       en: [
         "Native Android: Kotlin, Jetpack Compose",
-        "Cross-platform: Flutter (BloC)",
+        "Cross-platform: Flutter (BloC, Provider, Riverpod)",
         "5+ apps shipped to Play Store",
       ],
     },
