@@ -186,6 +186,8 @@ export type Experience = {
   title: string;
   org: string;
   location: string;
+  type?: string;
+  note?: { id: string; en: string };
   points: { id: string[]; en: string[] };
 };
 
@@ -195,6 +197,7 @@ export const experience: Experience[] = [
     title: "Mobile Developer & Backend Developer",
     org: "PT Lintas Cakra Cipta",
     location: "Bandung (Onsite)",
+    type: "Full-time",
     points: {
       id: [
         "Raja Derek V2 (Flutter): memimpin pengembangan end-to-end aplikasi pemesanan derek B2C - desain UI, integrasi API, hingga rilis.",
@@ -211,10 +214,15 @@ export const experience: Experience[] = [
     },
   },
   {
-    period: "Des 2024 - Okt 2025",
+    period: "Des 2024 - Des 2025",
     title: "Freelance Android Developer",
     org: "Feedloop.ai",
     location: "Remote",
+    type: "Freelance",
+    note: {
+      id: "Okt-Des 2025: masa transisi yang disetujui perusahaan baru - dikerjakan di luar jam kerja",
+      en: "Oct-Dec 2025: approved transition period with the new employer - handled outside working hours",
+    },
     points: {
       id: [
         "Melakukan migrasi implementasi map dari OpenStreetMap ke Google Maps API untuk meningkatkan akurasi lokasi dan kelengkapan data.",
@@ -231,10 +239,11 @@ export const experience: Experience[] = [
     },
   },
   {
-    period: "Jun 2024 - Des 2024",
+    period: "Jun 2024 - Jan 2025",
     title: "Mobile Developer",
     org: "Diskominsa Aceh Jaya",
-    location: "Onsite",
+    location: "Hybrid",
+    type: "Contract",
     points: {
       id: [
         "Merancang dan mengembangkan aplikasi informasi pemerintah Aceh Jaya secara mandiri, dari desain UI/UX hingga rilis di Play Store dan App Store menggunakan Flutter - mencapai 100+ downloads.",
@@ -257,6 +266,7 @@ export const experience: Experience[] = [
     title: "Mobile Developer",
     org: "Politeknik Negeri Lhokseumawe",
     location: "Onsite",
+    type: "Contract",
     points: {
       id: [
         "Memimpin desain dan pengembangan aplikasi Sistem Layanan Mahasiswa (Simpel) dengan fokus UI/UX intuitif menggunakan Flutter.",
@@ -272,18 +282,21 @@ export const experience: Experience[] = [
   },
   {
     period: "Jun 2023 - Jun 2024",
-    title: "Android Developer",
+    title: "Co-Founder & Android Developer",
     org: "Wisnu",
     location: "Remote",
+    type: "Startup - inkubasi Bangkit",
     points: {
       id: [
-        "Mengembangkan Wisnu, aplikasi travel Android yang merekomendasikan destinasi per wilayah, dari nol hingga rilis di Play Store menggunakan Jetpack Compose.",
+        "Menjalankan Wisnu sebagai co-founder - kelanjutan inkubasi capstone Bangkit yang mendapat pendanaan startup.",
+        "Mengembangkan aplikasi travel Android yang merekomendasikan destinasi per wilayah, dari nol hingga rilis di Play Store menggunakan Jetpack Compose.",
         "Membangun pengalaman rekomendasi di sisi client, terintegrasi dengan backend AI service yang menghasilkan saran perjalanan personal.",
         "Menerapkan arsitektur MVVM dengan Hilt dan Retrofit agar codebase modular dan testable.",
         "Bekerja dengan workflow Git berbasis PR, berkoordinasi dengan tim backend, design, dan QA.",
       ],
       en: [
-        "Developed Wisnu, an Android travel app recommending destinations by region, from scratch to Play Store release using Jetpack Compose.",
+        "Ran Wisnu as co-founder - a continuation of the Bangkit incubation after our capstone secured startup funding.",
+        "Developed the Android travel app recommending destinations by region, from scratch to Play Store release using Jetpack Compose.",
         "Built the recommendation experience on the client side, integrating with a backend AI service that generates personalized travel suggestions.",
         "Implemented MVVM architecture with Hilt and Retrofit to keep the codebase modular and testable.",
         "Worked in a PR-based Git workflow, coordinating with backend, design, and QA teams to deliver features.",
@@ -295,14 +308,15 @@ export const experience: Experience[] = [
     title: "Mobile Development Student",
     org: "Bangkit Academy",
     location: "Indonesia",
+    type: "Bootcamp",
     points: {
       id: [
         "Trainee Android Development dengan fokus penguasaan Kotlin untuk aplikasi mobile.",
-        "Capstone project masuk top 20 dan mendapatkan pendanaan startup berbasis solusi inovatif.",
+        "Capstone project masuk top 20 dan mendapatkan pendanaan startup - dilanjutkan sebagai Wisnu (lihat di atas).",
       ],
       en: [
         "Android Development Trainee focused on mastering Kotlin for mobile applications.",
-        "Top 20-ranked capstone project that secured startup funding for its innovative solution.",
+        "Top 20-ranked capstone project that secured startup funding - continued as Wisnu (see above).",
       ],
     },
   },
@@ -311,6 +325,7 @@ export const experience: Experience[] = [
     title: "Junior Mobile Programmer (BNSP)",
     org: "VSGA",
     location: "Indonesia",
+    type: "Bootcamp",
     points: {
       id: [
         "Trainee Android berspesialisasi Kotlin, mahir membangun aplikasi, testing, dan design pattern MVVM/MVP.",

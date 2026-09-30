@@ -16,12 +16,16 @@ const { t, lang } = Astro.props;
     {experience.map((e) => (
       <div class="grid grid-cols-[2fr_1fr_1fr] gap-6 border-b border-white/[0.08] py-6" data-fade-in-y>
         <div>
-          <p class="font-display text-base text-[#f7f5f2]">{e.title} <span class="text-[#b9b9b4]">· {e.org}</span></p>
+          <p class="flex flex-wrap items-center gap-2.5 font-display text-base text-[#f7f5f2]">
+            {e.title} <span class="text-[#b9b9b4]">· {e.org}</span>
+            {e.type && <span class="rounded border border-[#c496ff]/40 bg-[#c496ff]/[0.08] px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-[0.1em] text-[#c496ff]">{e.type}</span>}
+          </p>
           <ul class="mt-2 space-y-1">
             {e.points[lang].slice(0, 2).map((pt) => (
               <li class="text-[13px] leading-relaxed text-[#b9b9b4]">- {pt}</li>
             ))}
           </ul>
+          {e.note && <p class="mt-2 font-mono text-[11px] leading-relaxed text-[#8a8a86]">* {e.note[lang]}</p>}
         </div>
         <span class="font-mono text-xs text-[#b9b9b4]">{e.period}</span>
         <span class="text-right font-mono text-xs text-[#b9b9b4]">{e.location}</span>
@@ -33,13 +37,17 @@ const { t, lang } = Astro.props;
   <ol class="mt-8 space-y-8 md:hidden">
     {experience.map((e, i) => (
       <li data-fade-in-y style={`--d:${Math.min(i, 4) * 0.05}s`}>
-        <p class="font-mono text-[11px] uppercase tracking-[0.12em] text-[#c496ff]">{e.period} · {e.location}</p>
+        <p class="flex flex-wrap items-center gap-2 font-mono text-[11px] uppercase tracking-[0.12em] text-[#c496ff]">
+          {e.period} · {e.location}
+          {e.type && <span class="rounded border border-[#c496ff]/40 bg-[#c496ff]/[0.08] px-1.5 py-0.5 text-[10px]">{e.type}</span>}
+        </p>
         <h3 class="mt-2 font-display text-base text-[#f7f5f2]">{e.title} <span class="text-[#b9b9b4]">· {e.org}</span></h3>
         <ul class="mt-3 space-y-1.5">
           {e.points[lang].map((pt) => (
             <li class="text-[13px] leading-relaxed text-[#b9b9b4]">- {pt}</li>
           ))}
         </ul>
+        {e.note && <p class="mt-2.5 font-mono text-[11px] leading-relaxed text-[#8a8a86]">* {e.note[lang]}</p>}
       </li>
     ))}
   </ol>
